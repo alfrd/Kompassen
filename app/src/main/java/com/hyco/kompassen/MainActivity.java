@@ -18,4 +18,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void showCompass(View view) {
+        Intent intent2 = new Intent(this, Compass.class);
+        startActivity(intent2);
+
+    }
 }

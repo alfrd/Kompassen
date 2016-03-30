@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kompassen</string>
     <string name="button_accelerometer">Accelerometer</string>
+    <string name="button_compass">Compass</string>
 </resources>
