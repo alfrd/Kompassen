@@ -16,6 +16,7 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor rotationVector;
 
+    private String riktning;
     private Float currentDegree = 0f;
     private TextView tvDirection;
     private ImageView image;
@@ -28,6 +29,7 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
         rotationVector = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         tvDirection = (TextView) findViewById(R.id.direction);
         image = (ImageView) findViewById(R.id.image_compass);
+        riktning = "North";
     }
 
     @Override
@@ -39,8 +41,32 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
             degree = degree*180;
         }
 
+        if(degree < 45/2 || degree > (360 - 45/2)) {
+            riktning = "North";
+        }
+        if(degree > 45/2 && degree < (90-45/2)) {
+            riktning = "Northwest";
+        }
+        if(degree > (90-45/2) && degree < (90 + 45/2)) {
+            riktning = "West";
+        }
+        if(degree > (90 + 45/2) && degree < (180 - 45/2)) {
+            riktning = "Southwest";
+        }
+        if(degree > (180 - 45/2) && degree < (180 + 45/2)) {
+            riktning = "South";
+        }
+        if(degree > (225 - 45/2) && degree < (225 + 45/2)) {
+            riktning = "Southeast";
+        }
+        if(degree > (270 - 45/2) && degree < (270 + 45/2)) {
+            riktning = "East";
+        }
+        if(degree > (315 - 45/2) && degree < (315 + 45/2)) {
+            riktning = "Northeast";
+        }
 
-        tvDirection.setText(String.format("%.2f", degree) + (char) 176);
+        tvDirection.setText(String.format("%.2f",  (360 - degree)) + (char) 176 + " " + riktning);
 
         RotateAnimation ra = new RotateAnimation(currentDegree, degree, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
